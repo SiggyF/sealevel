@@ -10,3 +10,10 @@ rlr_monthly.zip
 slp.mnmean.real.nc
 uwnd.10m.mon.mean.nc
 vwnd.10m.mon.mean.nc
+wspd.10m.mon.mean.nc
+dt_upd_global_merged_msla_h_merged.nc
+psmsl.json
+stations.l.rdata
+
+*.Rout
+*.RData
