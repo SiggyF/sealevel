@@ -10,9 +10,13 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 
 requires = [
     'pyramid',
+    'pyramid_mako',
     'pyramid_chameleon',
+    'pyramid_beaker',
     'pyramid_debugtoolbar',
-    'waitress'
+    'waitress',
+    'pandas',
+    'rpy2'
     ]
 
 setup(name='sealevelapp',
