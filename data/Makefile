@@ -10,7 +10,8 @@ all: \
 	uwnd.10m.mon.mean.nc \
 	vwnd.10m.mon.mean.nc \
 	wspd.10m.mon.mean.nc \
-	dt_upd_global_merged_msla_h_y2013_m07.nc
+	dt_upd_global_merged_msla_h_merged.nc
+
 
 
 
@@ -48,7 +49,7 @@ wspd.10m.mon.mean.nc:
 	wget -c ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis.derived/surface_gauss/wspd.10m.mon.mean.nc
 
 # Satelite measurements of sealevel
-dt_upd_global_merged_msla_h_y2013_m07.nc:
+dt_upd_global_merged_msla_h_merged.nc:
 	wget -c -nd --recursive --accept '*.nc*' ftp://ftp.aviso.oceanobs.com/pub/oceano/AVISO/SSH/climatology/global/monthly_mean_dt_upd
 	gunzip *.nc.gz
 	for f in $(find . -name 'dt_upd_*.nc' -exec basename {} \;);do ncecat -v Grid_0001 $f record_$f; done
@@ -59,7 +60,7 @@ dt_upd_global_merged_msla_h_y2013_m07.nc:
 
 # Processing
 psmslsources := psmsl.R
-prepare.py: prepare.ipynb 
+prepare.py: prepare.ipynb
 	ipython nbconvert --to=python prepare.ipynb
 records_annual.csv overview.csv: prepare.py uwnd.10m.mon.mean.nc vwnd.10m.mon.mean.nc
 	python prepare.py
