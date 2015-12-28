@@ -12,7 +12,7 @@ requires = [
     'pyramid',
     'pyramid_chameleon',
     'pyramid_debugtoolbar',
-    'waitress',
+    'waitress'
     ]
 
 setup(name='sealevelapp',
