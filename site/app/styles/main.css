@@ -23,5 +23,6 @@ leaflet-map #map path {
   fill: #FF4081;
   opacity: 0.8;
   stroke: none;
-
+  cursor: crosshair;
 }
+b

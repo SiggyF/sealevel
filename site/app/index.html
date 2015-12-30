@@ -1,191 +1,138 @@
 <!doctype html>
-<!--
-    @license
-    Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-    Code distributed by Google as part of the polymer project is also
-    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-  -->
-
-<html lang="">
-
+<html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Polymer Starter Kit" />
-    <title>Title</title>
-    <!-- Place favicon.ico in the `app/` directory -->
+    <title>Sea-level trend analysis</title>
 
-    <!-- Chrome for Android theme color -->
-    <meta name="theme-color" content="#2EEAA1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
 
-    <!-- Web Application Manifest -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Tile color for Win8 -->
-    <meta name="msapplication-TileColor" content="#3372DF">
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="PSK">
-    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
-    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
-    <!-- Tile icon for Win8 (144x144) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild-->
-
-    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js js/vendor.js -->
+    <link rel="stylesheet" href="/bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css" />
+    <link rel="stylesheet" href="/bower_components/bootstrap-material-design/dist/css/ripples.css" />
 
-
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/d3/d3.js"></script>
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-
-    <!-- will be replaced with elements/elements.vulcanized.html -->
-    <link rel="import" href="elements/elements.html">
-    <!-- endreplace-->
-
-    <!-- For shared styles, shared-styles.html import in elements.html -->
-    <style is="custom-style" include="shared-styles"></style>
-
   </head>
+  <body>
+    <!--[if lt IE 10]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-  <body unresolved class="fullbleed layout vertical">
-    <span id="browser-sync-binding"></span>
-    <template is="dom-bind" id="app">
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">Sea-level trend analysis</h3>
+      </div>
 
-      <paper-drawer-panel id="paperDrawerPanel">
-        <!-- Drawer Scroll Header Panel -->
-        <paper-scroll-header-panel drawer fixed>
-
-          <!-- Drawer Toolbar -->
-          <paper-toolbar id="drawerToolbar">
-            <span class="paper-font-title">Menu</span>
-          </paper-toolbar>
-
-          <!-- Drawer Content -->
-          <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
-            <a data-route="home" href="{{baseUrl}}">
-              <iron-icon icon="home"></iron-icon>
-              <span>Home</span>
-            </a>
-
-            <a data-route="stations" href="{{baseUrl}}stations">
-              <iron-icon icon="info"></iron-icon>
-              <span>Stations</span>
-            </a>
-
-            <a data-route="contact" href="{{baseUrl}}contact">
-              <iron-icon icon="mail"></iron-icon>
-              <span>Contact</span>
-            </a>
-          </paper-menu>
-        </paper-scroll-header-panel>
-
-        <!-- Main Area -->
-        <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
-
-          <!-- Main Toolbar -->
-          <paper-toolbar id="mainToolbar" class="tall">
-            <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-            <span class="flex"></span>
-
-            <!-- Toolbar icons -->
-            <paper-icon-button icon="refresh"></paper-icon-button>
-            <paper-icon-button icon="search"></paper-icon-button>
-
-            <!-- Application name -->
-            <div class="middle middle-container center horizontal layout">
-              <div class="app-name">Sea-level rise</div>
+      <div class="row">
+        <div class="col-lg-8" >
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div id="map"></div>
             </div>
-
-            <!-- Application sub title -->
-            <div class="bottom bottom-container center horizontal layout">
-              <div class="bottom-title paper-font-subhead">Some subheading that says looks like a quote.</div>
-            </div>
-
-          </paper-toolbar>
-
-          <!-- Main Content -->
-          <div class="content">
-            <iron-pages attr-for-selected="data-route" selected="{{route}}">
-
-              <section data-route="home" >
-                <paper-material id="map-paper" >
-                  <leaflet-map zoom="2" latitude="50" longitude="20" id="leafletMap">
-                    <leaflet-tilelayer
-                       url="https://api.tiles.mapbox.com/v4/siggyf.c74e2e04/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
-                       min-zoom="1"
-                       max-zoom="20"
-		                   no-wrap>
-
-	                  </leaflet-tilelayer>
-                  </leaflet-map>
-
-                </paper-material>
-
-              </section>
-              <section data-route="contact">
-                <paper-material >
-                  <p>Contact</p>
-                </paper-material>
-
-              </section>
-              <section data-route="stations">
-                <paper-material>
-                  <p>Stations</p>
-                </paper-material>
-
-              </section>
-
-            </iron-pages>
           </div>
-        </paper-scroll-header-panel>
-      </paper-drawer-panel>
+        </div>
+<div class="col-lg-4" >
+          <div class="panel panel-default" id="station-info">
+            <div class="panel-heading" >
+              <div v-if="station.properties.name">{{ station.properties.name }}</div>
+            </div>
+            <div class="panel-body">
+              <p class="text-muted" v-if="!station">select a station</p>
+              <table class="table table-striped table-hover " v-else>
+                <thead>
+                  <tr>
+                    <th>property</th>
+                    <th>value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>id</th>
+                    <td>{{ station.id }}</td>
+                  </tr>
+                  <tr>
+                    <th>location</th>
+                    <td>{{ station.properties.latitude }}, {{ station.properties.longitude }}</td>
+                  </tr>
+                  <tr>
+                    <th>psmsl</th>
+                    <td><a href="http://www.psmsl.org/data/obtaining/stations/{{ station.id }}.php">{{ station.properties.name }}</a></td>
+                  </tr>
+                </tbody>
+              </table>
 
-      <paper-toast id="toast">
-        <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-      </paper-toast>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4" >
+          <div class="panel panel-default" id="station-plot">
+            <div class="panel-heading" >
+              plot
+            </div>
+            <div class="panel-body">
+              <svg></svg>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <!-- Uncomment next block to enable Service Worker support (1/2) -->
 
-      <paper-toast id="caching-complete"
-                   duration="6000"
-                   text="Caching complete! This app will work offline.">
-      </paper-toast>
+      <div class="footer">
+      </div>
+    </div>
 
-      <platinum-sw-register auto-register
-                            clients-claim
-                            skip-waiting
-                            on-service-worker-installed="displayInstalledToast">
-        <platinum-sw-cache default-cache-strategy="fastest"
-                           cache-config-file="cache-config.json">
-        </platinum-sw-cache>
-      </platinum-sw-register>
 
-    </template>
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/bootstrap-material-design/dist/js/material.js"></script>
+    <script src="/bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+    <script src="/bower_components/vue/dist/vue.js"></script>
+    <script src="/bower_components/lodash/lodash.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
 
-    <!-- build:js scripts/app.js -->
+    <!-- build:js scripts/plugins.js -->
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
-    <script src="scripts/app.js"></script>
     <script src="scripts/map.js"></script>
-    <!-- endbuild-->
+    <script src="scripts/stations.js"></script>
+    <script src="scripts/plot.js"></script>
+    <!-- endbuild -->
   </body>
-
 </html>
