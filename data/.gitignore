@@ -1,19 +1,29 @@
-dsea250.1grid.ICE5Gv1.3_VM2_L90_2012.nc
-etmgeg_235.nc
-id1-DENHDR.nc
-overview.csv
-prepare.py
-records.csv
-records_annual.csv
-rlr_annual.zip
-rlr_monthly.zip
+# downloaded
 slp.mnmean.real.nc
 uwnd.10m.mon.mean.nc
 vwnd.10m.mon.mean.nc
 wspd.10m.mon.mean.nc
 dt_upd_global_merged_msla_h_merged.nc
-psmsl.json
-stations.l.rdata
+dsea250.1grid.ICE5Gv1.3_VM2_L90_2012.nc
+etmgeg_235.nc
+id1-DENHDR.nc
 
+# generated
+prepare.py
+
+overview.csv
+psmsl.json
+records.csv
+records_annual.csv
+stations.l.rdata
+psmsl
+
+#psmsl
+catalogue.dat
+met_monthly.zip
+rlr_annual.zip
+rlr_monthly.zip
+
+# log files
 *.Rout
 *.RData
