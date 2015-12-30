@@ -104,7 +104,7 @@ stations.l <- llply(stations.l, function(station) {
 })
 
 ## For the Rdata we want to index by names
-names(stations.l) <- laply(stations.l, function(station){station$name})
+names(stations.l) <- laply(stations.l, function(station){station$id})
 ## Save to file, for faster access.
 save(stations.l, file="stations.l.rdata")
 
