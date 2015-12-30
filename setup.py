@@ -16,7 +16,8 @@ requires = [
     'pyramid_debugtoolbar',
     'waitress',
     'pandas',
-    'rpy2'
+    'rpy2',
+    'simplejson'
     ]
 
 setup(name='sealevelapp',

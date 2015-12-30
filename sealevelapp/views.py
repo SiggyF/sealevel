@@ -19,6 +19,28 @@ MIMES = {"png": "image/png",
          "excel": 'application/vnd.ms-excel'}
 
 
+def log_timer(wrapped):
+    def wrapper(context, request):
+        start = time.time()
+        response = wrapped(context, request)
+        duration = time.time() - start
+        response.headers['X-View-Time'] = '%.3f' % (duration,)
+        return response
+    return wrapper
+
+def cors_headers(wrapped):
+    def wrapper(context, request):
+        response = wrapped(context, request)
+        response.headers.update({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST,GET,DELETE,PUT,OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
+            'Access-Control-Max-Age': '1728000'
+        })
+        return response
+    return wrapper
+
+
 def parse_bool(boolstr):
     if boolstr.lower() in {"yes", "y", "ok", "on", "true"}:
         return True
@@ -56,13 +78,14 @@ def get_params(request):
 
 
 @view_config(route_name='stations', renderer='json')
+@cors_headers
 def make_stations(request):
     """return annual means as data"""
     # parameters
     params = get_params(request)
     return []
 
-@view_config(route_name='station', renderer='json')
+@view_config(route_name='station', renderer='jsonnan', decorator=cors_headers)
 def make_station(request):
     """return annual means as data"""
     # parameters
@@ -75,7 +98,6 @@ def make_station(request):
 
     mime = MIMES[params.get('format', 'json')]
     data = {
-        'records': df.to_dict(orient='records'),
-        'summary': summary
+        'records': df.to_dict(orient='records')
     }
     return data
