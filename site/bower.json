@@ -2,24 +2,25 @@
   "name": "polymer-starter-kit",
   "private": true,
   "dependencies": {
-    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
-    "neon-elements": "PolymerElements/neon-elements#^1.0.0",
-    "page": "visionmedia/page.js#~1.6.4",
-    "paper-elements": "PolymerElements/paper-elements#^1.0.1",
-    "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
-    "polymer": "Polymer/polymer#^1.2.0",
-    "paper-menu": "PolymerElements/paper-menu#4fecb43601",
-    "fetch": "~0.10.1",
-    "d3": "~3.5.12",
+    "bootstrap-sass": "~3.3.5",
+    "modernizr": "~2.8.1",
     "leaflet": "~0.7.7",
-    "leaflet-map": "~1.1.0",
-    "jquery": "~2.1.4"
+    "d3": "~3.5.12",
+    "bootstrap-material-design": "~0.5.7",
+    "vue": "~1.0.13",
+    "lodash": "~3.10.1"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/bootstrap/*",
+        "assets/javascripts/bootstrap.js"
+      ]
+    }
   },
   "devDependencies": {
-    "web-component-tester": "*"
-  },
-  "ignore": [],
-  "resolutions": {
-    "paper-menu": "4fecb43601"
+    "chai": "~3.4.2",
+    "mocha": "~2.3.4"
   }
 }
