@@ -50,6 +50,13 @@
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <!-- endbuild -->
 
+    <!-- build:js js/vendor.js -->
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <!-- endbuild -->
+
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link rel="import" href="elements/elements.html">
     <!-- endreplace-->
@@ -119,10 +126,20 @@
           <div class="content">
             <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
-              <section data-route="home">
-                <paper-material >
-                  <p>Home</p>
+              <section data-route="home" >
+                <paper-material id="map-paper" >
+                  <leaflet-map zoom="2" latitude="50" longitude="20" id="leafletMap">
+                    <leaflet-tilelayer
+                       url="https://api.tiles.mapbox.com/v4/siggyf.c74e2e04/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
+                       min-zoom="1"
+                       max-zoom="20"
+		                   no-wrap>
+
+	                  </leaflet-tilelayer>
+                  </leaflet-map>
+
                 </paper-material>
+
               </section>
               <section data-route="contact">
                 <paper-material >
@@ -165,7 +182,9 @@
     </template>
 
     <!-- build:js scripts/app.js -->
+    <script src="scripts/main.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/map.js"></script>
     <!-- endbuild-->
   </body>
 

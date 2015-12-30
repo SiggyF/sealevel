@@ -12,3 +12,16 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+
+leaflet-map {
+  height: 500px;
+}
+#map-paper {
+}
+
+leaflet-map #map path {
+  fill: #FF4081;
+  opacity: 0.8;
+  stroke: none;
+
+}
