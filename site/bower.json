@@ -8,7 +8,12 @@
     "paper-elements": "PolymerElements/paper-elements#^1.0.1",
     "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "polymer": "Polymer/polymer#^1.2.0",
-    "paper-menu": "PolymerElements/paper-menu#4fecb43601"
+    "paper-menu": "PolymerElements/paper-menu#4fecb43601",
+    "fetch": "~0.10.1",
+    "d3": "~3.5.12",
+    "leaflet": "~0.7.7",
+    "leaflet-map": "~1.1.0",
+    "jquery": "~2.1.4"
   },
   "devDependencies": {
     "web-component-tester": "*"
