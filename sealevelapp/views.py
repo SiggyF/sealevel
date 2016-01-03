@@ -77,8 +77,7 @@ def get_params(request):
 
 
 
-@view_config(route_name='stations', renderer='json')
-@cors_headers
+@view_config(route_name='stations', renderer='json', decorator=cors_headers)
 def make_stations(request):
     """return annual means as data"""
     # parameters

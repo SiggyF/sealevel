@@ -2,8 +2,20 @@ $icon-font-path: '../fonts/';
 
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/bootstrap-material-design/sass/bootstrap-material-design.scss";
+@import "bower_components/bootstrap-material-design/sass/ripples.scss";
+@import "bower_components/bootstrap-material-design/sass/plugins/_plugin-nouislider.scss";
 // endbower
+/* plot */
 
+.noUi-pips-horizontal {
+  width: 100%;
+
+}
+.noUi-value {
+  position: absolute;
+  text-align: center;
+}
 /* map */
 #map {
   height: 500px;
@@ -25,19 +37,73 @@ $icon-font-path: '../fonts/';
 
 
 }
+/* always present */
+.expand-transition {
+  transition: all .8s ease;
+}
+
+/* .expand-enter defines the starting state for entering */
+/* .expand-leave defines the ending state for leaving */
+.expand-enter, .expand-leave {
+  height: 0;
+  opacity: 0;
+}
 
 
 #station-plot {
+  #station-plot-year {
+    .noUi-handle {
+      width: 10px;
+      height: 10px;
+      left: -5px;
+      top: -4px;
+      box-shadow: none;
+    }
+    .noUi-base {
+      /* fix */
+      top: -1px;
+    }
+
+    .noUi-tooltip {
+      bottom: -20px;
+      border: none;
+      background: none;
+      padding: 0px;
+      top: auto;
+    }
+    .noUi-handle:after {
+      display: none;
+
+    }
+    .noUi-handle:before {
+      display: none;
+
+    }
+    /* .noUi-handle:before,.noUi-handle:after { */
+    /*   top: -5px; */
+    /*   left: 5px; */
+    /*   width: 10px; */
+    /*   height: 10px */
+    /* } */
+
+  }
   svg {
     width: 100%;
     min-height: 300px;
+    font: 10px sans-serif;
+    shape-rendering: crispEdges;
+
   }
+  rect {
+    fill: #ddd;
+  }
+
   .axis path,
   .axis line {
     fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+    stroke: #fff;
   }
+
 
   .area {
     fill: lightsteelblue;

@@ -8,6 +8,23 @@ function selectStation(station) {
   stationPlotVue.$data.station = station.station;
 }
 
+function updateStation() {
+  var options = {
+    startyear: _.get(stationPlotVue.$data.range, 0, 1900),
+    endyear: _.get(stationPlotVue.$data.range, 1, 2050)
+  };
+  if (!stationPlotVue.$data.id) {
+    return;
+  }
+  fetch(url + '/stations/' + stationPlotVue.$data.id + '?' + $.param(options))
+    .then(function(response) { return response.json()})
+    .then(function(json) {
+      stationPlotVue.$data.series = json.records;
+    })
+    .catch(function(ex) {
+      console.log('parsing failed', ex)
+    });
+}
 (function() {
   stationVue = new Vue({
     el: '#station-info',
@@ -21,19 +38,16 @@ function selectStation(station) {
     data: {
       id: null,
       station: {},
-      series: {}
+      series: {},
+      range: []
     }
   });
 
-  stationPlotVue.$watch('id', function (val) {
-    fetch(url + '/stations/' + val)
-      .then(function(response) { return response.json()})
-      .then(function(json) {
-        stationPlotVue.$data.series = json.records;
-      })
-      .catch(function(ex) {
-        console.log('parsing failed', ex)
-      });
+  stationPlotVue.$watch('id', function (id) {
+    updateStation();
+  });
+  stationPlotVue.$watch('range', function (range) {
+    updateStation();
   });
 
 }());

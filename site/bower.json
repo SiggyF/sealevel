@@ -8,7 +8,9 @@
     "d3": "~3.5.12",
     "bootstrap-material-design": "~0.5.7",
     "vue": "~1.0.13",
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "nouislider": "~8.2.1",
+    "wnumb": "~1.0.2"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -16,6 +18,15 @@
         "assets/stylesheets/_bootstrap.scss",
         "assets/fonts/bootstrap/*",
         "assets/javascripts/bootstrap.js"
+      ]
+    },
+    "bootstrap-material-design": {
+      "main": [
+        "sass/bootstrap-material-design.scss",
+        "sass/ripples.scss",
+        "sass/plugins/_plugin-nouislider.scss",
+        "dist/js/material.js",
+        "dist/js/ripples.js"
       ]
     }
   },
