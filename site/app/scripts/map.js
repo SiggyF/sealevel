@@ -1,3 +1,4 @@
+/* global selectStation */
 (function() {
   'use strict';
   var map = L.map('map');

@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-<div class="col-lg-4" >
+        <div class="col-lg-4" >
           <div class="panel panel-default" id="station-info">
             <div class="panel-heading" >
               <div v-if="station && station.properties.name">{{ station.properties.name }}</div>
@@ -88,7 +88,49 @@
             </div>
             <div class="panel-body" v-show="series.length" >
               <svg  transition="expand"></svg>
-              <div id="station-plot-year" class="slider shor"></div>
+              <form action="">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <div class="col-sm-4" >
+                      <label for="" class="control-label">analysis</label>
+
+                    </div>
+                    <div id="station-plot-year" class="slider shor col-sm-8">
+                    </div>
+                    <p class="help-block">Select start and end year.</p>
+
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-4">
+                      <label for="nodal" class="control-label">nodal</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="checkbox">
+                        <label>
+                          <input id="nodal" type="checkbox" >
+                          <span class="checkbox-material"></span>
+                        </label>
+                        <p class="help-block">Estimate the nodal cycle.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-4">
+                      <label for="ib" class="control-label">Inverse barometer</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="checkbox">
+                        <label>
+                          <input id="ib" type="checkbox" disabled >
+                          <span class="checkbox-material"></span>
+                        </label>
+                        <p class="help-block">Apply the inverse barometer based on the NCEP reanalysis.</p>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

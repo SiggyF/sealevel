@@ -51,7 +51,26 @@ $icon-font-path: '../fonts/';
 
 
 #station-plot {
+
+  /* no margin for the first group */
+  .form-group:first-of-type {
+    margin-top: 0;
+  }
+  .form-group {
+    margin-top: 0px;
+  }
+  .form-group {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  .form-group .col-sm-4 {
+    text-align: right;
+  }
   #station-plot-year {
+    top: 17px;
+
+
     .noUi-handle {
       width: 10px;
       height: 10px;
@@ -65,7 +84,8 @@ $icon-font-path: '../fonts/';
     }
 
     .noUi-tooltip {
-      bottom: -20px;
+      bottom: 8px;
+      left: -15px;
       border: none;
       background: none;
       padding: 0px;
@@ -106,11 +126,13 @@ $icon-font-path: '../fonts/';
 
 
   .area {
+    clip-path: url(#clip);
     fill: lightsteelblue;
     opacity: 0.3;
   }
 
   .line {
+    clip-path: url(#clip);
     fill: none;
     stroke: steelblue;
     stroke-width: 1.5px;

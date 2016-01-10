@@ -28,19 +28,28 @@
   },
   "eslintConfig": {
     "env": {
-      "node": true,
-      "browser": true
+      "node": false,
+      "browser": true,
+      "commonjs": false
+    },
+    "ecmaFeature": {
+      "modules": false
     },
     "globals": {
       "L": true,
       "d3": true,
-      "$": true
+      "$": true,
+      "Vue": true,
+      "_": true,
+      "wNumb": true,
+      "noUiSlider": true
     },
     "rules": {
       "quotes": [
         2,
         "single"
-      ]
+      ],
+      "no-console": 0
     }
   }
 }

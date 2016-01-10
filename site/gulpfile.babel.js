@@ -81,6 +81,7 @@ gulp.task('fonts', () => {
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
+    'app/**/data/psmsl/stations.json',
     '!app/*.html'
   ], {
     dot: true
@@ -138,6 +139,15 @@ gulp.task('serve:test', () => {
 
   gulp.watch('test/spec/**/*.js').on('change', reload);
   gulp.watch('test/spec/**/*.js', ['lint:test']);
+});
+
+gulp.task('vue', function() {
+  return gulp.src('app/vue/main.js')
+    .pipe($.browserify({
+      transform: 'vueify'
+    }))
+    .pipe(gulp.dest('public/js'))
+    .pipe(reload({stream: true}));
 });
 
 // inject bower components
