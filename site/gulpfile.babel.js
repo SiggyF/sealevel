@@ -88,9 +88,20 @@ gulp.task('extras', () => {
   }).pipe(gulp.dest('dist'));
 });
 
+gulp.task('vue', function() {
+  return gulp.src('app/scripts/vue.js')
+    .pipe($.browserify({
+      transform: 'vueify'
+    }))
+    .pipe(gulp.dest('.tmp/js'))
+    .pipe(gulp.dest('dist/js'))
+    .pipe(reload({stream: true}));
+});
+
+
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts'], () => {
+gulp.task('serve', ['styles', 'fonts', 'vue'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -141,14 +152,6 @@ gulp.task('serve:test', () => {
   gulp.watch('test/spec/**/*.js', ['lint:test']);
 });
 
-gulp.task('vue', function() {
-  return gulp.src('app/vue/main.js')
-    .pipe($.browserify({
-      transform: 'vueify'
-    }))
-    .pipe(gulp.dest('public/js'))
-    .pipe(reload({stream: true}));
-});
 
 // inject bower components
 gulp.task('wiredep', () => {
@@ -166,7 +169,7 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'fonts', 'vue', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
