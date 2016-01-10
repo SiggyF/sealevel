@@ -153,6 +153,10 @@ if (class(fit) == "loess") {
 }
 colnames(conf.int) <- c("year", "confidence.fit", "confidence.lwr", "confidence.upr")
 colnames(pred.int) <- c("year", "prediction.fit", "prediction.lwr", "prediction.upr")
+
+# Set missing data back
+df$waterlevel <- station.l$h
+
 ## Combine and return data
 merged <- join_all(list(pred.int, conf.int, df, df.selected[c("year", "predicted")]), by=c("year"), type="full")
 merged <- merged[order(merged$year),]
